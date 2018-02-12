@@ -14,14 +14,14 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('User was disconnected');
     });
-    socket.emit('newEmail', {
-        from: 'namiq@example.com',
-        text: "Hey what's up?",
-        createdAt: 123
-    });
 
     socket.on('createMessage', (message) => {
         console.log(message);
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getDate()
+        });
     });
 });
 
